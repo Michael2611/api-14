@@ -71,16 +71,10 @@ const create_post = async function (req, res) {
           let video_path = req.files.media.path.split("\\")[2];
           data.media = video_path;
 
-          // Use Sharp to resize the video and fit (adjust as needed)
-          await sharp(video)
-            .resize({ width: 640, height: 480, fit: "inside" })
-            .videoCodec("libx264")
-            .toFile(video_path);
-
           rutaPost = {
             Bucket: process.env.AWS_BUCKET,
             Key: "posts/" + video_path,
-            Body: fs.createReadStream(video_path),
+            Body: fs.createReadStream(video),
             ACL: "public-read",
           };
 
@@ -89,8 +83,9 @@ const create_post = async function (req, res) {
               console.error("Error uploading to S3:", err);
               return res.status(500).json({ error: "Failed to upload to S3" });
             }
-            fs.unlinkSync(video_path);
+            fs.unlinkSync(video);
           });
+
         } else {
           return res
             .status(400)
@@ -527,8 +522,8 @@ const delete_post = async function (req, res) {
   if (req.user) {
     let id = req.params["id"];
     const deletedPost = await Post.findByIdAndDelete(id);
-
-    if (deletedPost.tipo === "Imagen" || deletedPost.tipo === "Video") {
+    res.status(200).send({ message: "Post deleted successfully", data: deletedPost });
+    /*if (deletedPost.tipo === "Imagen" || deletedPost.tipo === "Video") {
       const params = {
         Bucket: process.env.AWS_BUCKET,
         Key: "posts/" + deletedPost.media,
@@ -548,7 +543,7 @@ const delete_post = async function (req, res) {
       res
         .status(200)
         .send({ message: "Post deleted successfully", data: deletedPost });
-    }
+    }*/
   } else {
     res.status(403).send({ message: "NoAccess" });
   }

@@ -20,7 +20,6 @@ var nodemailer = require('nodemailer');
 var smtp = require('nodemailer-smtp-transport');
 const usuario_amigo = require('../models/usuario_amigo');
 
-
 AWS.config.update({
     secretAccessKey: process.env.AWS_KEY_ID,
     accessKeyId: process.env.AWS_KEY_ACCESS,
@@ -28,6 +27,7 @@ AWS.config.update({
 });
 
 const s3 = new AWS.S3();
+
 
 const create_usuario = async function(req, res){
     let data = req.body;
@@ -92,7 +92,6 @@ const login_usuario = async function(req, res){
 const get_usuario = async function(req, res){
     if(req.user){
         var id = req.params['id'];
-
         var usuario = await Usuario.findById({_id:id});
         res.status(200).send({data:usuario});
     }else{
@@ -539,5 +538,5 @@ module.exports = {
     aceptar_declinar_invitacion,
     obtener_usuarios,
     obtener_portada_img,
-    obtener_avatar_img
+    obtener_avatar_img,
 }
