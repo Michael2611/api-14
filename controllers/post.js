@@ -33,7 +33,7 @@ const create_post = async function (req, res) {
           data.media = webpImg;
 
           sharp(img)
-            .webp()
+            .webp({ quality: 80 })
             .resize({ width: 800, height: 600, fit: "inside" })
             .toBuffer()
             .then((resizedImageBuffer) => {
