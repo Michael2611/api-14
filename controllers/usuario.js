@@ -501,19 +501,20 @@ const actualizar_avatar_usuario = async function(req, res){
 }
 
 const obtener_brochure = async function(req, res){
-    
-    //mostrar imagen de manera local
     const pdf = req.params.pdf; 
-    fs.stat('./uploads/brochures/'+pdf, function(err){
-        if(err){
-            res.status(200).send({message: 'No se encontro el brochure'});
-        }else{
-            let path_pdf = './uploads/brochures/'+pdf;
+    const path_pdf = './uploads/brochures/' + pdf;
+
+    // Verificar si el archivo existe
+    fs.stat(path_pdf, function(err, stats) {
+        if (err) {
+            res.status(404).send({message: 'No se encontró el brochure'});
+        } else {
+            // Enviar el archivo como una respuesta
             res.status(200).sendFile(path.resolve(path_pdf));
         }
     });
-
 }
+
 
 const obtener_portada_img = async function(req, res){
     var img = req.params['img'];
