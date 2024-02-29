@@ -19,6 +19,7 @@ var UsuarioSchema = Schema({
     username: {type: String, required: false},
     password: {type: String, required: true},
     code_reset: {type:String, required: false},
+    brochure: {type:String, required: false},
 
     puntos_eyngel: {type: String, required:false},
     verificado: {type: Boolean, required:false},

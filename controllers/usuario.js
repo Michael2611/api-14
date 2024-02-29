@@ -120,6 +120,24 @@ const update_usuario = async function(req, res){
     }
 }
 
+const update_brochure = async function(req, res){
+    if(req.user){
+        var id = req.params['id'];
+        var pdf = req.files.pdf.path;
+
+        var name = pdf.split('\\')[2];
+        
+        var usuario = await Usuario.findByIdAndUpdate({_id:id},{
+            brochure: name,
+        });
+
+        res.status(200).send({message: 'Brochure cargado con exito'});
+        
+    }else{
+        res.status(403).send({message: 'NoAccess'});
+    }
+}
+
 const update_password = async function(req, res){
     if(req.user){
         var id = req.params['id'];
@@ -482,6 +500,21 @@ const actualizar_avatar_usuario = async function(req, res){
     }
 }
 
+const obtener_brochure = async function(req, res){
+    
+    //mostrar imagen de manera local
+    const pdf = req.params.pdf; 
+    fs.stat('./uploads/brochures/'+pdf, function(err){
+        if(err){
+            res.status(200).send({message: 'No se encontro el brochure'});
+        }else{
+            let path_pdf = './uploads/brochures/'+pdf;
+            res.status(200).sendFile(path.resolve(path_pdf));
+        }
+    });
+
+}
+
 const obtener_portada_img = async function(req, res){
     var img = req.params['img'];
 
@@ -524,6 +557,7 @@ module.exports = {
     login_usuario,
     get_usuario,
     update_usuario,
+    update_brochure,
     update_password,
     validate_usuario,
     validate_code,
@@ -539,4 +573,5 @@ module.exports = {
     obtener_usuarios,
     obtener_portada_img,
     obtener_avatar_img,
+    obtener_brochure
 }
