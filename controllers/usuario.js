@@ -138,6 +138,21 @@ const update_brochure = async function(req, res){
     }
 }
 
+const update_color = async function(req, res){
+    if(req.user){
+        var id = req.params['id'];
+        var data = req.body;
+        
+        var usuario = await Usuario.findByIdAndUpdate({_id:id},{
+            color: data.color,
+        });
+
+        res.status(200).send({message: 'Color actualizado'});
+    }else{
+        res.status(403).send({message: 'NoAccess'});
+    }
+}
+
 const update_password = async function(req, res){
     if(req.user){
         var id = req.params['id'];
@@ -559,6 +574,7 @@ module.exports = {
     get_usuario,
     update_usuario,
     update_brochure,
+    update_color,
     update_password,
     validate_usuario,
     validate_code,

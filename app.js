@@ -11,7 +11,7 @@ var app = express();
 const httpServer = createServer(app);
 const io = new Server(httpServer, {
     cors: {
-        origin: "https://api-14-kj41.onrender.com/api",
+        origin: "http://localhost:4201",
         methods: ["GET", "POST"]
     }
 })
@@ -45,29 +45,11 @@ var canal_routes = require('./routes/canal');
 //conexión entorno local
 /*mongoose.connect('mongodb://127.0.0.1:27017/eyngel-social')
     .then(() => {
-        httpServer.listen(port, ()=> {
-            console.log("Servidor corriendo " + port);
-        })
+        app.listen(port, () => console.log("Servidor escuchando en el puerto", port));
     })
     .catch((err) => {
         console.error(err);
-    });
-
-//configuración aws-s3
-aws.config.update({
-    secretAccessKey: process.env.AWS_KEY_ID,
-    accessKeyId: process.env.AWS_KEY_ACCESS,
-    region: process.env.AWS_REGION, // Ejemplo: 'us-east-1'
-});
-
-/*const s3 = new aws.S3();
-s3.listBuckets((err, data)=> {
-    if (err) {
-        console.error('Error al intentar conectar con AWS:', err);
-    } else {
-        console.log('Conexión exitosa con AWS. Buckets disponibles:', data.Buckets);
-    }
-})*/
+    });*/
 
 //conexión entorno cloud
 mongoose.connect(process.env.ATLAS_URL)

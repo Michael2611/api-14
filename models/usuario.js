@@ -13,6 +13,8 @@ var UsuarioSchema = Schema({
     avatar: {type: String, default: 'defecto.png', required: false},
     portada: {type: String, required: false},
 
+    color: {type: String, required: false},
+
     estado: {type: Boolean, default:true, required: true},
     esAmigo: {type: Boolean, required: false},
     descripcion: {type: String, required: false},
