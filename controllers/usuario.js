@@ -488,7 +488,6 @@ const actualizar_portada_usuario = async function(req, res){
 }
 
 const actualizar_avatar_usuario = async function(req, res){
-    if(req.user){
 
         var img = req.files.avatar.path;
 
@@ -509,7 +508,7 @@ const actualizar_avatar_usuario = async function(req, res){
             //fs.unlinkSync(img);
         })
 
-        var usuario = await Usuario.findByIdAndUpdate({_id:req.user.sub},
+        var usuario = await Usuario.findByIdAndUpdate({_id:req.user},
             {
                 avatar: img.split('\\')[2]
             });
@@ -519,9 +518,7 @@ const actualizar_avatar_usuario = async function(req, res){
             res.status(200).send({data:'algo fallo'});
         }
             
-    }else{
-        res.status(403).send({message: 'No Access'});
-    }
+
 }
 
 const obtener_brochure = async function(req, res){
