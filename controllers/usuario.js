@@ -122,12 +122,14 @@ const update_usuario = async function(req, res){
 
 const update_brochure = async function(req, res){
     if(req.user){
+        
         var id = req.params['id'];
+        console.log(id);
         var pdf = req.files.pdf.path;
 
         var name = pdf.split('\\')[2];
         
-        var usuario = await Usuario.findByIdAndUpdate({_id:id},{
+        await Usuario.findByIdAndUpdate({_id:id},{
             brochure: name,
         });
 
