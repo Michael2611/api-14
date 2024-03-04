@@ -29,11 +29,11 @@ app.post('/validate_usuario/', usuarioController.validate_usuario);
 app.get('/validate_code/:code/:email', usuarioController.validate_code);
 app.post('/reset_password/:email', usuarioController.reset_password);
 app.get('/obtener_usuarios_username/:username', auth.auth, usuarioController.obtener_usuarios_username);
-app.post('/actualizar_portada_usuario', [auth.auth,path], usuarioController.actualizar_portada_usuario);
+app.put('/actualizar_portada_usuario', [auth.auth,path], usuarioController.actualizar_portada_usuario);
 app.get('/obtener_portada_img/:img', usuarioController.obtener_portada_img);
 app.get('/obtener_avatar_img/:img', usuarioController.obtener_avatar_img);
 app.get('/obtener_brochure/:pdf', usuarioController.obtener_brochure);
-app.post('/actualizar_avatar_usuario', [auth.auth,pathAvatar], usuarioController.actualizar_avatar_usuario);
+app.put('/actualizar_avatar_usuario', [auth.auth,pathAvatar], usuarioController.actualizar_avatar_usuario);
 
 app.post('/send_invitacion_amistad', auth.auth, usuarioController.send_invitacion_amistad);
 app.get('/get_usuario_random', [auth.auth, cache.withTtl('1 hour')], usuarioController.get_usuarios_random);

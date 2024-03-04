@@ -492,8 +492,6 @@ const actualizar_avatar_usuario = async function(req, res){
 
         var img = req.files.avatar.path;
 
-        console.log(img);
-
         const rutaAvatar = {
             Bucket: process.env.AWS_BUCKET,
             Key: "avatar/"+img.split('\\')[2],//ruta imagen,
@@ -506,7 +504,7 @@ const actualizar_avatar_usuario = async function(req, res){
                 console.error('Error uploading to S3:', err);
                 return res.status(500).json({ error: 'Failed to upload to S3' });
             }
-            //fs.unlinkSync(img);
+            fs.unlinkSync(img);
         })
 
         var usuario = await Usuario.findByIdAndUpdate({_id:req.user.sub},
