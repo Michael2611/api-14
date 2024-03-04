@@ -513,7 +513,12 @@ const actualizar_avatar_usuario = async function(req, res){
             {
                 avatar: img.split('\\')[2]
             });
+        if(usuario){
             res.status(200).send({data:usuario});
+        }else{
+            res.status(200).send({data:'algo fallo'});
+        }
+            
     }else{
         res.status(403).send({message: 'No Access'});
     }
