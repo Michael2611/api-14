@@ -514,7 +514,7 @@ const actualizar_avatar_usuario = async function(req, res){
                 avatar: img.split('\\')[2]
             });
         if(usuario){
-            res.status(200).send({data:usuario});
+            res.status(200).send({data:req.user.sub});
         }else{
             res.status(200).send({data:'algo fallo'});
         }
