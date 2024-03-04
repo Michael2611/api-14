@@ -41,6 +41,4 @@ app.get('/get_invitaciones_usuario/:tipo', auth.auth, usuarioController.get_invi
 app.get('/aceptar_declinar_invitacion/:tipo/:id', auth.auth, usuarioController.aceptar_declinar_invitacion);
 app.get('/obtener_usuarios/:filtro', auth.auth, usuarioController.obtener_usuarios);
 
-app.use(cache);
-
 module.exports = app;
