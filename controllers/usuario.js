@@ -127,7 +127,7 @@ const update_brochure = async function(req, res){
         console.log(id);
         var pdf = req.files.pdf.path;
 
-        var name = pdf.split('\\')[2];
+        var name = pdf.split('/')[2]; //cambiar a \\ cuando se ejecute en server windows
         
         await Usuario.findByIdAndUpdate({_id:id},{
             brochure: name,
@@ -536,7 +536,6 @@ const obtener_brochure = async function(req, res){
         }
     });
 }
-
 
 const obtener_portada_img = async function(req, res){
     var img = req.params['img'];
