@@ -494,7 +494,7 @@ const actualizar_avatar_usuario = async function(req, res){
 
         const rutaAvatar = {
             Bucket: process.env.AWS_BUCKET,
-            Key: "avatar/"+img,//ruta imagen,
+            Key: "avatar/"+img.split('/')[2],//ruta imagen,
             Body: fs.createReadStream(img),
             ACL: 'public-read', // Permite que los archivos sean públicos
         }
@@ -509,10 +509,10 @@ const actualizar_avatar_usuario = async function(req, res){
 
         var usuario = await Usuario.findByIdAndUpdate({_id:req.user.sub},
             {
-                avatar: img
+                avatar: img.split('/')[2]
             });
         if(usuario){
-            res.status(200).send({data:img});
+            res.status(200).send({data:img.split('/')[2]});
         }else{
             res.status(200).send({data:'algo fallo'});
         }
