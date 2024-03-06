@@ -512,7 +512,7 @@ const actualizar_avatar_usuario = async function(req, res){
                 avatar: img.split('\\')[2]
             });
         if(usuario){
-            res.status(200).send({data:img});
+            res.status(200).send({data:img.split('\\')[2]});
         }else{
             res.status(200).send({data:'algo fallo'});
         }
@@ -549,17 +549,6 @@ const obtener_portada_img = async function(req, res){
     const url = s3.getSignedUrl('getObject', params);
 
     res.redirect(url);
-
-    //mostrar imagen de manera local
-    /*fs.stat('./uploads/portadas/'+img, function(err){
-        if(err){
-            res.status(200).send({message: 'No se encontro la imagen'});
-        }else{
-            let path_img = './uploads/portadas/'+img;
-            res.status(200).sendFile(path.resolve(path_img));
-        }
-    });*/
-
 }
 
 const obtener_avatar_img = async function(req, res){
