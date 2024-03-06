@@ -509,10 +509,10 @@ const actualizar_avatar_usuario = async function(req, res){
 
         var usuario = await Usuario.findByIdAndUpdate({_id:req.user.sub},
             {
-                avatar: img.split('\\')[2]
+                avatar: img
             });
         if(usuario){
-            res.status(200).send({data:img.split('\\')[2]});
+            res.status(200).send({data:img});
         }else{
             res.status(200).send({data:'algo fallo'});
         }
