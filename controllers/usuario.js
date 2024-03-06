@@ -464,7 +464,7 @@ const actualizar_portada_usuario = async function(req, res){
 
         const rutaPortada = {
             Bucket: process.env.AWS_BUCKET,
-            Key: "portadas/"+img.split('\\')[2],//ruta imagen,
+            Key: "portadas/"+img.split('/')[2],//ruta imagen,
             Body: resizedImageBuffer,
             ACL: 'public-read', // Permite que los archivos sean públicos
         }
@@ -479,7 +479,7 @@ const actualizar_portada_usuario = async function(req, res){
         
         var usuario = await Usuario.findByIdAndUpdate({_id:req.user.sub},
         {
-            portada: img.split('\\')[2]
+            portada: img.split('/')[2]
         });
         res.status(200).send({data:usuario});
     }else{
