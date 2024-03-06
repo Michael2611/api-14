@@ -494,7 +494,7 @@ const actualizar_avatar_usuario = async function(req, res){
 
         const rutaAvatar = {
             Bucket: process.env.AWS_BUCKET,
-            Key: "avatar/"+img.split('\\')[2],//ruta imagen,
+            Key: "avatar/"+img,//ruta imagen,
             Body: fs.createReadStream(img),
             ACL: 'public-read', // Permite que los archivos sean públicos
         }
